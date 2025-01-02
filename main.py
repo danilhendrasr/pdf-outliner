@@ -2,6 +2,8 @@ from pypdf import PdfReader, PdfWriter
 import sys
 from typing import List, Tuple
 
+output_path = "output.pdf"
+
 
 def parse_recipe_file(recipe_path: str) -> List[Tuple[int, str, int]]:
     """
@@ -22,7 +24,6 @@ def parse_recipe_file(recipe_path: str) -> List[Tuple[int, str, int]]:
             try:
                 page_str, title = line.split(": ", 1)
                 page = int(page_str)
-                print(page, title, level)
                 outlines.append(
                     (page - 1, title, level)
                 )  # Convert to 0-based page numbering
@@ -33,7 +34,7 @@ def parse_recipe_file(recipe_path: str) -> List[Tuple[int, str, int]]:
     return outlines
 
 
-def add_outlines_to_pdf(pdf_path: str, recipe_path: str, output_path: str):
+def add_outlines_to_pdf(pdf_path: str, recipe_path: str):
     """
     Add outlines to the PDF file based on the recipe file.
     """
@@ -74,17 +75,19 @@ def add_outlines_to_pdf(pdf_path: str, recipe_path: str, output_path: str):
 
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: python hello.py input.pdf recipe.txt output.pdf")
+    if len(sys.argv) != 3:
+        print("Usage: uv run main.py input.pdf recipe.txt")
         sys.exit(1)
 
     input_pdf = sys.argv[1]
     recipe_file = sys.argv[2]
-    output_pdf = sys.argv[3]
 
     try:
-        add_outlines_to_pdf(input_pdf, recipe_file, output_pdf)
-        print(f"Successfully created PDF with outlines: {output_pdf}")
+        add_outlines_to_pdf(
+            input_pdf,
+            recipe_file,
+        )
+        print(f"Successfully created PDF with outlines to {output_path}")
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
