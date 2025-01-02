@@ -1,0 +1,13 @@
+1: Introduction
+  2: What is Machine Learning
+  4: Types of Machine Learning
+    5: Supervised Learning
+    7: Unsupervised Learning
+    9: Reinforcement Learning
+10: Data Preprocessing
+  11: Data Cleaning
+  13: Feature Engineering
+15: Model Training
+  16: Model Selection
+  18: Hyperparameter Tuning
+20: Conclusion 
